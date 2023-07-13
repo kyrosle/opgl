@@ -184,11 +184,16 @@ int main() {
     // 渲染指令
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLES /* 绘制三角形 */, 0 /* 顶点数组的起始索引 */,
+                 3 /* 打算绘制多少个顶点 */);
 
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
+
+  glDeleteVertexArrays(1, &VAO);
+  glDeleteBuffers(1, &VBO);
+  glDeleteProgram(shaderProgram);
 
   glfwTerminate();
   return 0;

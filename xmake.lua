@@ -8,10 +8,15 @@ add_packages("glfw", "glad")
 add_rules("plugin.compile_commands.autoupdate", {outputdir = "build"})
 set_targetdir("bin")
 
+add_includedirs("lib")
+add_files("lib/*.cpp")
+
 targets = {
   "window",
   "triangle",
-  "rectangle"
+  "rectangle",
+  "glsl",
+  "texture"
 }
 
 for i, label in pairs(targets) do

@@ -3,6 +3,9 @@
     "Dloadproc",
     "framebuffer",
     "glfw",
-    "OPENGL"
+    "MIPMAP",
+    "OPENGL",
+    "Parameterfv",
+    "Parameteri"
   ]
 }
