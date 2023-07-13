@@ -22,4 +22,7 @@ and then the setting referencing `xmake.lua`.
 - `glsl.cpp`: shader programming
   ![](pic/Peek%202023-07-13%2016-00.gif)
 - `texture.cpp`: add texture
- ![](pic/Peek%202023-07-13%2019-16.gif)
+  ![](pic/Peek%202023-07-13%2019-16.gif)
+- `3d`: use `glm` to transform/rotate the object, more like 3d object.
+  ![](pic/Peek%202023-07-13%2023-03.gif)
+  ![](pic/Peek%202023-07-13%2023-05.gif)

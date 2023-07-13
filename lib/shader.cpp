@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sstream>
 
+#include <glm/gtc/type_ptr.hpp>
+
 Shader::Shader(const char *vertexPath, const char *fragmentPath) {
   // 1. 从文件路径获取 顶点/片段 着色器
   std::string vertexCode;
@@ -78,21 +80,30 @@ Shader::Shader(const char *vertexPath, const char *fragmentPath) {
 
 void Shader::use() { glUseProgram(ID); }
 
+unsigned int Shader::getUniform(const std::string &name) const {
+  return glGetUniformLocation(ID, name.c_str());
+}
+
 void Shader::setBool(const std::string &name, bool value) const {
-  glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
+  glUniform1i(getUniform(name), (int)value);
 }
 void Shader::setInt(const std::string &name, int value) const {
-  glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
+  glUniform1i(getUniform(name), value);
 }
 void Shader::setFloat(const std::string &name, float value) const {
-  glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+  glUniform1f(getUniform(name), value);
 }
 void Shader::setVec3(const std::string &name, float value1, float value2,
                      float value3) const {
-  glUniform3f(glGetUniformLocation(ID, name.c_str()), value1, value2, value3);
+  glUniform3f(getUniform(name), value1, value2, value3);
 }
 void Shader::setVec4(const std::string &name, float value1, float value2,
                      float value3, float value4) const {
-  glUniform4f(glGetUniformLocation(ID, name.c_str()), value1, value2, value3,
-              value4);
+  glUniform4f(getUniform(name), value1, value2, value3, value4);
+}
+
+void Shader::setMatrix4fv(const std::string &name, glm::mat4 value) const {
+  glUniformMatrix4fv(getUniform(name), 1 /* 多少可矩阵 */,
+                     GL_FALSE /* 如何矩阵进行转置,交换矩阵的行和列 */,
+                     glm::value_ptr(value));
 }

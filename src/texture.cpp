@@ -1,3 +1,7 @@
+#include "glm/detail/qualifier.hpp"
+#include "glm/ext/matrix_transform.hpp"
+#include "glm/ext/vector_float3.hpp"
+#include "glm/fwd.hpp"
 #include "shader.h"
 #include "stb_image.h"
 #include <GLFW/glfw3.h>
@@ -5,6 +9,10 @@
 #include <glad/glad.h>
 #include <iostream>
 #include <vector>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 // 希望渲染的三角形
 float vertices[] = {
@@ -192,6 +200,15 @@ int main() {
 
     // y offset
     float y_offset = (std::cos(timeValue) / 2.0); // 颜色在 0.0 到 1.0 之间变化
+
+    glm::mat4 trans = glm::mat4(1.0f);
+    trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+    trans = glm::rotate(trans, timeValue, glm::vec3(0.0f, 0.0f, 1.0f));
+
+    unsigned int transformLoc = shader->getUniform("transform");
+    glUniformMatrix4fv(transformLoc, 1 /* 多少可矩阵 */,
+                       GL_FALSE /* 如何矩阵进行转置,交换矩阵的行和列 */,
+                       glm::value_ptr(trans));
 
     shader->setVec4("uColor", 0.0f, greenValue, blueValue, 0.1f);
     shader->setVec3("transPos", x_offset, y_offset, 0);
