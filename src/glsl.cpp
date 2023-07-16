@@ -87,7 +87,7 @@ int main() {
     // 更新一个uniform之前你必须先使用程序（调用glUseProgram)，
     //  因为它是在当前激活的着色器程序中设置uniform的
     // glUseProgram(shaderProgram);
-    shader->use();
+    shader->useProgram();
 
     float timeValue = glfwGetTime(); // 获得运行的秒数
     // g

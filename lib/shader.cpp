@@ -63,13 +63,13 @@ Shader::Shader(const char *vertexPath, const char *fragmentPath) {
               << infoLog << std::endl;
   }
   // 着色器程序
-  ID = glCreateProgram();
-  glAttachShader(ID, vertex);
-  glAttachShader(ID, fragment);
-  glLinkProgram(ID);
-  glGetProgramiv(ID, GL_LINK_STATUS, &success);
+  m_id = glCreateProgram();
+  glAttachShader(m_id, vertex);
+  glAttachShader(m_id, fragment);
+  glLinkProgram(m_id);
+  glGetProgramiv(m_id, GL_LINK_STATUS, &success);
   if (!success) {
-    glGetProgramInfoLog(ID, 512, NULL, infoLog);
+    glGetProgramInfoLog(m_id, 512, NULL, infoLog);
     std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
               << infoLog << std::endl;
   }
@@ -78,10 +78,10 @@ Shader::Shader(const char *vertexPath, const char *fragmentPath) {
   glDeleteShader(fragment);
 }
 
-void Shader::use() { glUseProgram(ID); }
+void Shader::useProgram() { glUseProgram(m_id); }
 
 unsigned int Shader::getUniform(const std::string &name) const {
-  return glGetUniformLocation(ID, name.c_str());
+  return glGetUniformLocation(m_id, name.c_str());
 }
 
 void Shader::setBool(const std::string &name, bool value) const {
@@ -93,17 +93,31 @@ void Shader::setInt(const std::string &name, int value) const {
 void Shader::setFloat(const std::string &name, float value) const {
   glUniform1f(getUniform(name), value);
 }
-void Shader::setVec3(const std::string &name, float value1, float value2,
-                     float value3) const {
-  glUniform3f(getUniform(name), value1, value2, value3);
+void Shader::setVec2(const std::string &name, const glm::vec2 &value) const {
+  glUniform2fv(getUniform(name), 1, &value[0]);
 }
-void Shader::setVec4(const std::string &name, float value1, float value2,
-                     float value3, float value4) const {
-  glUniform4f(getUniform(name), value1, value2, value3, value4);
+void Shader::setVec2(const std::string &name, float x, float y) const {
+  glUniform2f(getUniform(name), x, y);
 }
-
-void Shader::setMatrix4fv(const std::string &name, glm::mat4 value) const {
-  glUniformMatrix4fv(getUniform(name), 1 /* 多少可矩阵 */,
-                     GL_FALSE /* 如何矩阵进行转置,交换矩阵的行和列 */,
-                     glm::value_ptr(value));
+void Shader::setVec3(const std::string &name, const glm::vec3 &value) const {
+  glUniform3fv(getUniform(name), 1, &value[0]);
+}
+void Shader::setVec3(const std::string &name, float x, float y, float z) const {
+  glUniform3f(getUniform(name), x, y, z);
+}
+void Shader::setVec4(const std::string &name, const glm::vec4 &value) const {
+  glUniform4fv(getUniform(name), 1, &value[0]);
+}
+void Shader::setVec4(const std::string &name, float x, float y, float z,
+                     float w) const {
+  glUniform4f(getUniform(name), x, y, z, w);
+}
+void Shader::setMat2(const std::string &name, const glm::mat2 &mat) const {
+  glUniformMatrix2fv(getUniform(name), 1, GL_FALSE, &mat[0][0]);
+}
+void Shader::setMat3(const std::string &name, const glm::mat3 &mat) const {
+  glUniformMatrix3fv(getUniform(name), 1, GL_FALSE, &mat[0][0]);
+}
+void Shader::setMat4(const std::string &name, const glm::mat4 &mat) const {
+  glUniformMatrix4fv(getUniform(name), 1, GL_FALSE, &mat[0][0]);
 }

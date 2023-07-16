@@ -11,13 +11,25 @@ set_targetdir("bin")
 add_includedirs("lib")
 add_files("lib/*.cpp")
 
+target("game")
+  set_kind("binary")
+  add_includedirs("game2d")
+  add_files("game2d/*.cpp")
+  add_files("game2d/program.cpp")
+
 targets = {
   "window",
   "triangle",
   "rectangle",
   "glsl",
   "texture",
-  "3d"
+  "3d",
+  "camera",
+  "color",
+  "lighting",
+  "material",
+  "lightcaster",
+  "multiplelight"
 }
 
 for i, label in pairs(targets) do

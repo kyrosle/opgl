@@ -162,7 +162,7 @@ int main() {
   stbi_image_free(data);
 
   // 设置uniform变量之前激活着色器程序
-  shader->use();
+  shader->useProgram();
   // 设置每个采样器的方式告诉OpenGL每个着色器采样器属于哪个纹理单元
   shader->setInt("texture1", 0);
   shader->setInt("texture2", 1);
@@ -184,7 +184,7 @@ int main() {
     glActiveTexture(GL_TEXTURE1); // 在绑定纹理之前先激活纹理单元
     glBindTexture(GL_TEXTURE_2D, texture2);
 
-    shader->use();
+    shader->useProgram();
 
     float timeValue = glfwGetTime(); // 获得运行的秒数
     // g

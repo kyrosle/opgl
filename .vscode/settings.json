@@ -6,6 +6,7 @@
     "MIPMAP",
     "OPENGL",
     "Parameterfv",
-    "Parameteri"
+    "Parameteri",
+    "xoffset"
   ]
 }
