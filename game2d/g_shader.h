@@ -12,7 +12,7 @@
 // General purpose shader object. Compiles from file, generates
 // compile/link-time error messages and hosts several utility
 // functions for easy management.
-class Shader : std::enable_shared_from_this<Shader> {
+class Shader : public std::enable_shared_from_this<Shader> {
 public:
   typedef std::shared_ptr<Shader> ptr;
 

@@ -22,6 +22,7 @@ void Texture2D::Generate(unsigned int width, unsigned int height,
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, Wrap_T);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, Filter_Min);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, Filter_Max);
+
   // unbind texture
   glBindTexture(GL_TEXTURE_2D, 0);
 }

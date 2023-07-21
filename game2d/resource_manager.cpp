@@ -93,6 +93,9 @@ Texture2D::ptr ResourceManager::loadTextureFromFile(const char *file,
   if (alpha) {
     texture->Internal_Format = GL_RGBA;
     texture->Image_Format = GL_RGBA;
+  } else {
+    texture->Internal_Format = GL_RGB;
+    texture->Image_Format = GL_RGB;
   }
   int width, height, nrChannels;
   unsigned char *data = stbi_load(file, &width, &height, &nrChannels, 0);

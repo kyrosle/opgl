@@ -2,8 +2,8 @@ add_rules("mode.debug", "mode.release")
 
 -- glfw: used to create or manage window, user input, program time, opengl context mangement
 -- glad: Get the function address at runtime and save it in a function pointer for later use
-add_requires("glfw", "glad", "glm")
-add_packages("glfw", "glad", "glm")
+add_requires("glfw", "glad", "glm", "freetype")
+add_packages("glfw", "glad", "glm", "freetype")
 
 add_rules("plugin.compile_commands.autoupdate", {outputdir = "build"})
 set_targetdir("bin")
